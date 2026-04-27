@@ -11,19 +11,19 @@ A local web app for side-by-side review of video model training outputs. Load ex
 
 ## Quick Start (MacOS)
 
+### Installation
+
 The included install script handles Homebrew, Node.js, uv, and all dependencies automatically:
 
 ```bash
 ./install.sh
 ```
 
-Pre-load experiment directories on launch:
+### Run
 
 ```bash
-./install.sh /path/to/experiment_a /path/to/experiment_b
+uv run python main.py [/path/to/exp_1] [/path/to/exp_2]
 ```
-
-Open [http://localhost:8000](http://localhost:8000) in your browser.
 
 ## Keyboard Shortcuts
 

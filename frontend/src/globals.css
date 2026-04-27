@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --color-bg: #09090b;
+  --color-surface: #18181b;
+  --color-surface-hover: #27272a;
+  --color-border: #3f3f46;
+  --color-accent: #6366f1;
+  --color-accent-hover: #818cf8;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #3f3f46 transparent;
+}
+
+video {
+  background: #000;
+}

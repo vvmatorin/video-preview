@@ -1,0 +1,13 @@
+[project]
+name = "video-preview"
+version = "0.1.0"
+description = "Local web app for side-by-side review of video model training outputs"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+]
+
+[project.scripts]
+video-preview = "main:cli"

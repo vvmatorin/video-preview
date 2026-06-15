@@ -4,9 +4,7 @@ import { AddExperimentModal } from "./AddExperimentModal";
 
 export function Toolbar() {
   const [modalOpen, setModalOpen] = useState(false);
-  const globalMuted = useAppStore((s) => s.globalMuted);
   const videosPerRow = useAppStore((s) => s.videosPerRow);
-  const toggleMute = useAppStore((s) => s.toggleMute);
   const setVideosPerRow = useAppStore((s) => s.setVideosPerRow);
 
   return (
@@ -22,32 +20,6 @@ export function Toolbar() {
               <line x1="2" y1="8" x2="14" y2="8" />
             </svg>
             Add Experiment
-          </button>
-
-          <div className="h-5 w-px bg-zinc-700" />
-
-          <button
-            onClick={toggleMute}
-            className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-colors shrink-0 ${
-              globalMuted
-                ? "bg-zinc-800 text-zinc-400 hover:bg-zinc-700"
-                : "bg-emerald-600/20 text-emerald-400 hover:bg-emerald-600/30"
-            }`}
-            title={globalMuted ? "Unmute all (M)" : "Mute all (M)"}
-          >
-            {globalMuted ? (
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
-                <path d="M8 2L4 6H1v4h3l4 4V2z" />
-                <line x1="12" y1="5" x2="15" y2="11" stroke="currentColor" strokeWidth="1.5" />
-                <line x1="15" y1="5" x2="12" y2="11" stroke="currentColor" strokeWidth="1.5" />
-              </svg>
-            ) : (
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
-                <path d="M8 2L4 6H1v4h3l4 4V2z" />
-                <path d="M11 5.5c.8.8 1.2 1.8 1.2 2.5s-.4 1.7-1.2 2.5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-              </svg>
-            )}
-            {globalMuted ? "Muted" : "Sound"}
           </button>
 
           <div className="h-5 w-px bg-zinc-700" />

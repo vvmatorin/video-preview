@@ -5,13 +5,12 @@ interface AppState {
   experiments: Experiment[];
   videosPerRow: number;
   playingRows: Set<number>;
-  globalMuted: boolean;
 
   addExperiment: (name: string, dirPath: string) => Promise<void>;
   removeExperiment: (id: string) => void;
   setVideosPerRow: (n: number) => void;
   toggleRowPlay: (rowIndex: number) => void;
-  toggleMute: () => void;
+  toggleExperimentMute: (id: string) => void;
 }
 
 let nextId = 1;
@@ -20,7 +19,6 @@ export const useAppStore = create<AppState>((set) => ({
   experiments: [],
   videosPerRow: 1,
   playingRows: new Set<number>(),
-  globalMuted: true,
 
   addExperiment: async (name, dirPath) => {
     const res = await fetch(`/api/scan?path=${encodeURIComponent(dirPath)}`);
@@ -39,6 +37,7 @@ export const useAppStore = create<AppState>((set) => ({
       id: `exp-${nextId++}`,
       name: name || data.path.split("/").pop() || "Experiment",
       dirPath: data.path,
+      muted: true,
       videos: data.videos.map((v) => ({
         id: `vid-${nextId++}`,
         name: v.name,
@@ -66,5 +65,10 @@ export const useAppStore = create<AppState>((set) => ({
       return { playingRows: new Set([rowIndex]) };
     }),
 
-  toggleMute: () => set((s) => ({ globalMuted: !s.globalMuted })),
+  toggleExperimentMute: (id) =>
+    set((s) => ({
+      experiments: s.experiments.map((e) =>
+        e.id === id ? { ...e, muted: !e.muted } : e
+      ),
+    })),
 }));

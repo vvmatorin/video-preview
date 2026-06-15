@@ -6,13 +6,13 @@ import type { Video } from "../types";
 interface Props {
   video: Video;
   rowIndex: number;
+  muted: boolean;
 }
 
-export const VideoCell = memo(function VideoCell({ video, rowIndex }: Props) {
+export const VideoCell = memo(function VideoCell({ video, rowIndex, muted }: Props) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const { containerRef, visibility } = useLazyVideo();
   const isRowPlaying = useAppStore((s) => s.playingRows.has(rowIndex));
-  const globalMuted = useAppStore((s) => s.globalMuted);
   const prevRowPlaying = useRef(false);
 
   useEffect(() => {
@@ -32,8 +32,8 @@ export const VideoCell = memo(function VideoCell({ video, rowIndex }: Props) {
 
   useEffect(() => {
     const vid = videoRef.current;
-    if (vid) vid.muted = globalMuted;
-  }, [globalMuted]);
+    if (vid) vid.muted = muted;
+  }, [muted]);
 
   const videoSrc = `/api/video?path=${encodeURIComponent(video.path)}`;
 
@@ -51,7 +51,7 @@ export const VideoCell = memo(function VideoCell({ video, rowIndex }: Props) {
         <video
           ref={videoRef}
           src={videoSrc}
-          muted={globalMuted}
+          muted={muted}
           loop
           playsInline
           preload="metadata"

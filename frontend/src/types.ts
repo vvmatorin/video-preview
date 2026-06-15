@@ -9,4 +9,5 @@ export interface Experiment {
   name: string;
   dirPath: string;
   videos: Video[];
+  muted: boolean;
 }

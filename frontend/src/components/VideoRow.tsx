@@ -67,6 +67,7 @@ export const VideoRow = memo(function VideoRow({
                 key={video.id}
                 video={video}
                 rowIndex={rowIndex}
+                muted={exp.muted}
               />
             ))}
           </div>
